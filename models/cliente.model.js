@@ -21,6 +21,11 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
           type: DataTypes.STRING(15),
           unique: false
         },
+        sector: {
+          type: DataTypes.ENUM('Público','Privado'), 
+          default:'Creado',
+          unique: false
+        },
         fax: {
           type: DataTypes.STRING(15),
           unique: false

@@ -15,6 +15,12 @@ const cpUpload = upload.fields([{ name: 'filename', maxCount: 1 }])
     // Retrieve all cargos
     router.get("/clientes",authJwt.verifyToken, Controller.findAll);
   
+    // Retrieve all cargos
+    router.get("/cliente",authJwt.verifyToken, Controller.findPerfil);
+    
+    // Retrieve all cargos
+    router.put("/cliente",[cpUpload,authJwt.verifyToken], Controller.udpdatePerfil);
+
     // Update a cargo with id
     router.put("/clientes",[cpUpload,authJwt.verifyToken, authJwt.isAdmin], Controller.update);
   

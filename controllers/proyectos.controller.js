@@ -39,6 +39,7 @@ exports.create = async (req, res) => {
   body.descripcion=req.body.descripcion;
   body.justificacion=req.body.justificacion;
   body.empresa_id=req.body.empresa_id;
+  body.status="Creado";
   body.elabora_id=req.userId;
   body.aprueba_id=req.body.aprueba_id;
   // Save
@@ -110,6 +111,35 @@ exports.findOne = async (req, res) => {
         });
       });
   };
+
+  exports.findEmpresas = async (req, res) => {
+
+    await  Proyectos.findAll({
+        where: {
+          empresa_id :req.body.empresa_id
+        }, 
+        include: [  
+          {
+            model:Empresa,
+            where: {
+              cliente_id :req.body.cliente_id
+            }, 
+          }
+        ],
+        order: [
+          ['id', 'DESC'],
+        ],
+      })
+        .then(data => {
+          res.send(data);
+          console.log(data);
+        })
+        .catch(err => {
+          res.send(500).send({
+            message: err.message || "Some error accurred while retrieving books."
+          });
+        });
+    };
 
 
 exports.findAll = async (req, res) => {

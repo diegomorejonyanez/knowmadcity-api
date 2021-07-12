@@ -26,6 +26,7 @@ exports.create = async (req, res) => {
   body.nombre=req.body.nombre;
   body.direccion=req.body.fundadireccionda;
   body.telefono=req.body.telefono;
+  body.sector=req.body.sector;
   body.fax=req.body.fax;
   body.celular=req.body.celular;
   body.email=req.body.email; 
@@ -60,6 +61,77 @@ async function CrearCliente(body){
   });
 }
 
+exports.findPerfil = async (req, res) => {
+  await  Clientes.findOne({
+      limit: 3000000,
+      offset: 0,
+      where: { }, // conditions
+      include: [  
+        {
+          model:User,
+          attributes:['status','imagen'],
+          where: { id: req.userId },
+        }
+      ],
+      order: [
+        ['id', 'DESC'],
+      ],
+    })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.send(500).send({
+          message: err.message || "Some error accurred while retrieving books."
+        });
+      });
+  };
+
+// Update a Book by the id in the request
+exports.udpdatePerfil = async (req, res) => {
+  // Create a Book
+  const body={};
+  if(req.files['filename']){
+    const { filename } = req.files['filename'][0]
+    body.logo = `https://plataformaknowmad.herokuapp.com/public/${filename}`;  
+  }
+  if(req.files['filename']){
+    const { filename } = req.files['filename'][0]
+    body.imagen = `https://plataformaknowmad.herokuapp.com/public/${filename}`;  
+  }
+  body.nombre=req.body.nombre;
+  body.telefono=req.body.telefono;
+  body.fax=req.body.fax;
+  body.celular=req.body.celular;
+
+    await Clientes.update(body,{
+        where: { id: req.body.id }
+      })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "editado satisfactoriamente."
+        });
+        User.update(body,{
+            where: { id: req.body.user_id }
+          })
+      } else {
+        res.send({
+          message: `No puede editar el coargo con el  el =${id}. Tal vez el cargo no existe o la peticion es vacia!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error al intentar editar el cargo con el id=" + id
+      });
+    });
+};
+
+
+
+
+
 exports.findAll = async (req, res) => {
     await  Clientes.findAll({
         limit: 3000000,
@@ -88,6 +160,7 @@ exports.findAll = async (req, res) => {
 
 // Update a Book by the id in the request
 exports.update = async (req, res) => {
+  console.log(req.body);
   // Create a Book
   const body={};
   if(req.files['filename']){
@@ -101,6 +174,7 @@ exports.update = async (req, res) => {
   body.nombre=req.body.nombre;
   body.direccion=req.body.fundadireccionda;
   body.telefono=req.body.telefono;
+  body.sector=req.body.sector;
   body.fax=req.body.fax;
   body.celular=req.body.celular;
   body.email=req.body.email; 

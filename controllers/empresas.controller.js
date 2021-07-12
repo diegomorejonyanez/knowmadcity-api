@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const db = require("../models");
 const Empresas = db.empresas;
+const Proyectos = db.proyectos;
 const User = db.user;
 const Op = db.Op;
 
@@ -27,7 +28,7 @@ exports.create = async (req, res) => {
   body.volumen_facturacion=req.body.volumen_facturacion;
   body.direccion=req.body.direccion;
   body.fundada=req.body.fundada;
-  
+  body.cliente_id=req.body.cliente_id;
   // Save Book in database
  await Empresas.create(body)
     .then(data => {
@@ -69,6 +70,12 @@ exports.findAll = async (req, res) => {
           where: { cliente_id :req.body.cliente_id  }, // conditions
           order: [
             ['id', 'DESC'],
+          ],
+          include: [  
+            {
+              model:Proyectos,
+              attributes:['id','titulo']
+            },
           ],
         })
           .then(data => {

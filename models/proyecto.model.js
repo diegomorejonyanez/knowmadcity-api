@@ -17,8 +17,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             unique: false
         },
         status: {
-          type: DataTypes.ENUM('Pendiente', 'Aprobado', 'Rechazado'), 
-          default:'creado',
+          type: DataTypes.ENUM('Creado','Pendiente', 'Aprobado', 'Rechazado'),  
+          default:'Creado',
           unique: false
         },
         presupuesto: {

@@ -9,10 +9,11 @@ const cpUpload = upload.fields([{ name: 'filename', maxCount: 1 },{ name: 'firma
   // Retrieve all Books
   router.get("/user/all",[authJwt.verifyToken ], controller.findAll);
 
-  router.get("/user/admin",[authJwt.verifyToken ], controller.findAdmin);
+  router.get("/user/admin",[authJwt.verifyToken], controller.findAdmin);
 
   router.post("/user/create",[cpUpload,authJwt.verifyToken,verifySignUp.checkDuplicateUsernameOrEmail], controller.create);
 
+  router.put("/user/canal",[cpUpload ,authJwt.verifyToken,authJwt.isActive], controller.updateCanal);
 
   router.post("/user/update",[cpUpload,authJwt.verifyToken], controller.update);
 

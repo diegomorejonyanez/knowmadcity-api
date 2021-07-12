@@ -12,7 +12,10 @@ const cpUpload = upload.fields([{ name: 'filename', maxCount: 1 }])
     // Create a new cargo
 
     router.post("/proyectos/find",[cpUpload], Controller.findOne); 
+
+    router.post("/proyectos/findEmpresas",[cpUpload], Controller.findEmpresas); 
     // Create a new cargo
+    
     router.post("/proyectos",[cpUpload,authJwt.verifyToken,authJwt.isAdmin], Controller.create);
   
     // Retrieve all cargos
