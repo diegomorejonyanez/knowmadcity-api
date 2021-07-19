@@ -41,6 +41,12 @@ db.empresas.hasMany(db.proyectos, { foreignKey: 'empresa_id' });
 db.proyectos.belongsTo(db.empresas, { foreignKey: 'empresa_id' });
 
 
+db.user.hasMany(db.notificacion, { as: 'destinatario', foreignKey: 'uid' });
+db.user.hasMany(db.notificacion, { as: 'remitente', foreignKey: 'uidr' });
+db.notificacion.belongsTo(db.user, { as: 'remitente', foreignKey: 'uidr' });
+db.notificacion.belongsTo(db.user, { as: 'destinatario', foreignKey: 'uid' });
+
+
 db.user.hasMany(db.proyectos, { as: 'Elabora', foreignKey: 'elabora_id' });
 db.user.hasMany(db.proyectos, { as: 'Aprueba', foreignKey: 'aprueba_id' });
 db.proyectos.belongsTo(db.user, { as: 'Elabora', foreignKey: 'elabora_id' });

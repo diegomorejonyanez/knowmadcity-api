@@ -18,7 +18,9 @@ module.exports = {
   //    idle: 10000
   //  }
   //},
- 
+  server:{
+    SERVER:"https://plataformaknowmad.herokuapp.com/public/"
+  },
     /** DATABASE */
   db: {
     DB_HOST: "babej9nkpstdq8y4srbn-mysql.services.clever-cloud.com",
@@ -26,7 +28,6 @@ module.exports = {
     DB_PASS: "RRbZZq1yYyg2Zvnkrbr1",
     DB_NAME: "babej9nkpstdq8y4srbn",
     dialect: "mysql",
-  
     // pool is optional, it will be used for Sequelize connection pool configuration
     pool: {
       max: 5,

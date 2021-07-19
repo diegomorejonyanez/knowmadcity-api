@@ -4,7 +4,7 @@ const Empresas = db.empresas;
 const Proyectos = db.proyectos;
 const User = db.user;
 const Op = db.Op;
-
+const config = require("../config/config.js");
 // Create and Save a new Book
 exports.create = async (req, res) => {
   // Validate request
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
   const body={}; 
   if(req.files['filename']){
     const { filename } = req.files['filename'][0]
-    body.logo = `https://plataformaknowmad.herokuapp.com/public/${filename}`;  
+    body.logo = `${config.server.SERVER+filename}`;  
   }
   body.nombre=req.body.nombre;
   body.cargo_contacto=req.body.cargo_contacto;
@@ -95,7 +95,7 @@ exports.update = async (req, res) => {
   const body={};
   if(req.files['filename']){
     const { filename } = req.files['filename'][0]
-    body.logo = `https://plataformaknowmad.herokuapp.com/public/${filename}`;  
+    body.logo = `${config.server.SERVER+filename}`;  
   }
   body.nombre=req.body.nombre;
   body.cargo_contacto=req.body.cargo_contacto;

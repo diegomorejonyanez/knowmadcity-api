@@ -25,7 +25,7 @@ app.use('/api', require('./routes/auth.routes'));
 app.use('/api', require('./routes/clientes.routes'));
 app.use('/api', require('./routes/proyectos.routes'));
 app.use('/api', require('./routes/empresas.routes'));
-
+app.use('/api', require('./routes/notificacion.routes'));
 
 
 // Middleware para Vue.js router modo history

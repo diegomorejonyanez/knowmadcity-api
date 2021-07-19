@@ -35,7 +35,12 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         },
         objetivos: { 
             type: DataTypes.JSON,
-          
+        },
+        dimension_digital: { 
+          type: DataTypes.JSON,
+        },
+        dimension_ecologica: { 
+          type: DataTypes.JSON,
         },
         metas: {
             type: DataTypes.JSON,
@@ -51,7 +56,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         descripcion:  {
             type: DataTypes.TEXT('long'),
         },
-        oservaciones:  {
+        observaciones:  {
           type: DataTypes.TEXT('long'),
         },
         justificacion: {

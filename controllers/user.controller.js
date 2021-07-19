@@ -5,6 +5,8 @@ const User = db.user;
 const Op = db.Op;
 const bcrypt = require("bcrypt");
 
+
+
 // Retrieve all Books from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
@@ -103,12 +105,12 @@ exports.create = async (req, res) => {
   const body={};
   if(req.files['filename']){
     const { filename } = req.files['filename'][0]
-    body.imagen= `https://plataformaknowmad.herokuapp.com/public/${filename}`;
+    body.imagen= `${config.server.SERVER+filename}`;
     console.log(body.imagen);
   }
   if(req.files['firma']){
     const { firma } = req.files['firma'][0]
-    body.firma= `https://plataformaknowmad.herokuapp.com/public/${firma}`;
+    body.firma= `${config.server.SERVER+firma}`;
     console.log(body.imagen);
   }
   body.password = bcrypt.hashSync(req.body.password, 8)
@@ -136,11 +138,11 @@ exports.update = (req, res) => {
   const body={};
   if(req.files['filename']){
     const { filename } = req.files['filename'][0]
-    body.imagen= `https://plataformaknowmad.herokuapp.com/public/${filename}`;
+    body.imagen= `${config.server.SERVER+filename}`;
   }
   if(req.files['firma']){
     const { firma } = req.files['firma'][0]
-    body.firma= `https://plataformaknowmad.herokuapp.com/public/${firma}`;
+    body.firma= `${config.server.SERVER+firma}`;
 
   }
   body.tipo= req.body.tipo;

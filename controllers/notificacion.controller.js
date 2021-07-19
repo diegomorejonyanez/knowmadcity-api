@@ -61,11 +61,16 @@ exports.findAll = (req, res) => {
     order: [
       ['id', 'DESC'],
     ],
+    include: [{
+      model: User, as: 'remitente',
+      attributes:['nombre','imagen'] 
+    }]
   })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
+      console.log(err);
       res.send(500).send({
         message: err.message || "Some error accurred while retrieving books."
       });
